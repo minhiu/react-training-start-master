@@ -13,3 +13,7 @@
 .jumbotron > .container {
   text-align: left;
 }
+
+.alternateBackgroundColor {
+  background-color: #f5f5f5;
+}
