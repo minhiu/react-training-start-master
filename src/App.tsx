@@ -3,11 +3,26 @@ import './App.css';
 import { Navigation } from './navigation/Navigation';
 import { Jumbotron } from './jumbotron/Jumbotron';
 import { LicensePlate } from './license-plate/LicensePlate';
-import { CALIFORNIA_PLATE, LICENSE_PLATES } from "./mock-data";
+import { LicensePlateData } from './license-plate-data.type';
+import { Spinner } from './spinner/Spinner';
 
-export class App extends React.Component {
+type AppState = {
+  licensePlates: LicensePlateData[],
+  isLoading: boolean
+}
 
+export class App extends React.Component<{}, AppState> {
+  state = {
+    licensePlates: [],
+    isLoading: true
+  };
 	name = 'React';
+
+	async componentDidMount(): Promise<void> {
+		const response = await fetch("http://localhost:8000/data")
+		const data = await response.json();
+    this.setState({ licensePlates: data, isLoading: false });
+	}
 
 	render() {
 		return (
@@ -19,11 +34,17 @@ export class App extends React.Component {
 					<Jumbotron title="Welcome to our store" description="Browse our collection of license plates"/>
 					<div className="container">
 						<div className="row" >
-							{LICENSE_PLATES.map((licensePlate, index) => (
-							<div key={licensePlate._id} className={(index % 2 === 0) ? "alternateBackgroundColor col-md-4" : "col-md-4"}>
-								<LicensePlate plate={licensePlate} buttonText="Add to cart"/>
-							</div>
-							))}
+							{
+								this.state.isLoading ? 
+                  <div className='mx-auto'>
+                      <Spinner />
+                  </div> :
+									this.state.licensePlates.map((licensePlate: LicensePlateData, index: number) => (
+                    <div key={licensePlate._id} className={`col-md-4 ${(index % 2 === 0) && "alternate-plate-background"}`}>
+                      <LicensePlate plate={licensePlate} buttonText="Add to cart"/>
+                    </div>
+                  ))
+	            }
 						</div>
 					</div>
 				</main>

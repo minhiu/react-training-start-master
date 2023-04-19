@@ -17,7 +17,10 @@ export class LicensePlate extends Component<LicensePlateProps> {
 		const plate = this.props.plate as LicensePlateData;
 		return (
 			<>
-			<h2>{plate.title}</h2>
+			<h2>
+				{plate.title}
+				{plate.onSale && <img src={process.env.PUBLIC_URL + "sale.png"} />}
+			</h2>
 			<img src={plate.picture} className="img-fluid" />
 			<p>{plate.description}</p>
 			<div>
