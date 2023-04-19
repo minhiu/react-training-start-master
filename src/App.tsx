@@ -5,6 +5,7 @@ import { Jumbotron } from './jumbotron/Jumbotron';
 import { LicensePlate } from './license-plate/LicensePlate';
 import { LicensePlateData } from './license-plate-data.type';
 import { Spinner } from './spinner/Spinner';
+import { CheckoutForm } from './checkout-form/CheckoutForm';
 
 type AppState = {
   licensePlates: LicensePlateData[],
@@ -33,6 +34,7 @@ export class App extends React.Component<{}, AppState> {
 				<main role="main">
 					<Jumbotron title="Welcome to our store" description="Browse our collection of license plates"/>
 					<div className="container">
+            <CheckoutForm />
 						<div className="row" >
 							{
 								this.state.isLoading ? 
