@@ -46,7 +46,7 @@ export class App extends React.Component<{}, AppState> {
           <main role="main">
             <Routes>
               <Route path="/" element={<StoreView currencyInfo={this.state.currencyInfo} />}></Route>
-              <Route path="/cart" element={<CartView />}></Route>
+              <Route path="/cart" element={<CartView currencyInfo={this.state.currencyInfo} />}></Route>
               <Route path="/checkout" element={<CheckoutView />}></Route>
             </Routes>
           </main>

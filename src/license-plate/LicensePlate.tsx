@@ -7,15 +7,12 @@ import { CURRENCIES, CurrencyInfo, LicensePlateData } from '../license-plate-dat
 type LicensePlateProps = {
 	plate: LicensePlateData,
 	buttonText: string,
-	currencyInfo: CurrencyInfo
+	currencyInfo: CurrencyInfo,
+	onButtonClicked: (plate: LicensePlateData) => Promise<void>
 }
 
 export class LicensePlate extends Component<LicensePlateProps, {}> {
 
-	buttonClicked = () => {
-		alert("Plate added to cart");
-	}
-	
 	render() {
 		const plate = this.props.plate as LicensePlateData;
 		const { currency, exchangeRate } = this.props.currencyInfo;
@@ -28,9 +25,12 @@ export class LicensePlate extends Component<LicensePlateProps, {}> {
 			<img src={plate.picture} className="img-fluid" />
 			<p>{plate.description}</p>
 			<div>
-			<h2 className="float-left">{CURRENCIES[currency]}{(this.props.plate.price / exchangeRate).toFixed(2)}</h2>
-			<button onClick={this.buttonClicked} className="btn btn-primary float-right" role="button">
-				{this.props.buttonText}
+			<h2 className="float-left">{CURRENCIES[currency]}{(this.props.plate.price * exchangeRate).toFixed(2)}</h2>
+			<button 
+				onClick={() => this.props.onButtonClicked(this.props.plate)} 
+				className="btn btn-primary float-right" 
+				role="button">
+					{this.props.buttonText}
 			</button>
 			</div>
 			</>
