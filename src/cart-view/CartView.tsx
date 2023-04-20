@@ -10,7 +10,7 @@ type CartViewProps = {
 
 export function CartView(props: CartViewProps) {
 
-	const [cartContents, addPlateToCart, removePlateFromCart] = useCart();
+	const [cartContents, , removePlateFromCart] = useCart();
 
 	let rows;
 	if (cartContents) {
