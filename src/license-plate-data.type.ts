@@ -9,5 +9,15 @@ export interface LicensePlateData {
     description: string;
 }
 
-
 export type Currency = "USD" | "EUR" | "GBP";
+
+export type CurrencyInfo = {
+    currency: Currency,
+    exchangeRate: number
+}
+
+export const CURRENCIES = {
+	USD: "$",
+	EUR: "€",
+	GBP: "£"
+}

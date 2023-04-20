@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { ChangeEvent, useEffect, useState } from "react"
 
 type State = {
     name: string,
@@ -8,7 +8,7 @@ type State = {
 type StateDropdownProps = {
   name: string
   value: string,
-  onChange: (event: any) => void
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 };
 
 export const StateDropdown = (props: StateDropdownProps) => {
@@ -22,8 +22,8 @@ export const StateDropdown = (props: StateDropdownProps) => {
 
   return (
     <select className="form-control" placeholder="State" name={props.name} required value={props.value} onChange={props.onChange}>
-      {usStates.map((state, index) => 
-          <option key={index} value={state.name}>{state.abbreviation}</option>
+      {usStates.map((state) => 
+          <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
       )}
     </select>
   );

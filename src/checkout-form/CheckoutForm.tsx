@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { StateDropdown } from './StateDropdown';
 
 type CheckoutFormState = {
@@ -24,12 +24,12 @@ export class CheckoutForm extends React.Component {
       "cc": ''
   };
 
-  handleChange = (event: any) => {
+  handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const {name, value} = event.target;
       this.setState({[name]: value });
   };
 
-  checkZipCodeValidity = (event: any) => {
+  checkZipCodeValidity = (event: ChangeEvent<HTMLInputElement>) => {
     this.handleChange(event);
     if (event.target.validationMessage !== "") {
         this.setState({zipValid: false});
@@ -38,7 +38,7 @@ export class CheckoutForm extends React.Component {
     }
   };
 
-  onSubmit = (event: any) => {
+  onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     fetch('http://localhost:8000/checkout', {
         method: 'POST',
